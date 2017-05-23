@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO Insert your API-KEY here
     public static final String API_KEY = "";
-    public static final String KEY_MOVIE = "MOVIE";
     public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
     private final String POPULAR = "popular";
     private final String TOP_RATED = "top_rated";
@@ -53,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         movieList = new ArrayList<>();
         movieAdapter = new MovieAdapter(this, movieList);
-        GridView gridView = (GridView) findViewById(R.id.gv_movies);
-        gridView.setAdapter(movieAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GridView gvMovies = (GridView) findViewById(R.id.gv_movies);
+        gvMovies.setAdapter(movieAdapter);
+        gvMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Movie movie = movieAdapter.getItem(position);
                 Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-                intent.putExtra(KEY_MOVIE, movie);
+                intent.putExtra("movie", movie);
                 startActivity(intent);
             }
         });
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvErrorMessage.setVisibility(View.INVISIBLE);
 
-        FetchMovieTask moviesTask = new FetchMovieTask(new MyCallback() {
+        FetchMovieTask moviesTask = new FetchMovieTask(new Callback() {
             @Override
             public void updateAdapter(Movie[] movies) {
                 if (movies != null) {
@@ -119,35 +118,29 @@ public class MainActivity extends AppCompatActivity {
 
     public class FetchMovieTask extends AsyncTask<String, Void, Movie[]> {
 
-        private final MyCallback movieTaskCallback;
+        private final Callback callback;
 
-        FetchMovieTask(MyCallback movieTaskCallback) {
-            this.movieTaskCallback = movieTaskCallback;
+        FetchMovieTask(Callback movieTaskCallback) {
+            this.callback = movieTaskCallback;
         }
 
-        private Movie[] getMoviesFromJson(String movieJsonString) throws JSONException {
-            final String ORIGINAL_TITLE = "original_title";
-            final String POSTER_PATH = "poster_path";
-            final String OVERVIEW = "overview";
-            final String VOTE_AVERAGE = "vote_average";
-            final String RELEASE_DATE = "release_date";
-
-            if (movieJsonString == null || "".equals(movieJsonString)) {
+        private Movie[] getMoviesFromJson(String jsonStringMovie) throws JSONException {
+            if (jsonStringMovie == null || "".equals(jsonStringMovie)) {
                 return null;
             }
 
-            JSONObject jsonObjectMovie = new JSONObject(movieJsonString);
+            JSONObject jsonObjectMovie = new JSONObject(jsonStringMovie);
             JSONArray jsonArrayMovies = jsonObjectMovie.getJSONArray("results");
 
             Movie[] movies = new Movie[jsonArrayMovies.length()];
 
             for (int i = 0; i < jsonArrayMovies.length(); i++) {
                 JSONObject object = jsonArrayMovies.getJSONObject(i);
-                movies[i] = new Movie(object.getString(ORIGINAL_TITLE),
-                        object.getString(POSTER_PATH),
-                        object.getString(OVERVIEW),
-                        object.getString(VOTE_AVERAGE),
-                        object.getString(RELEASE_DATE));
+                movies[i] = new Movie(object.getString("original_title"),
+                        object.getString("poster_path"),
+                        object.getString("overview"),
+                        object.getString("vote_average"),
+                        object.getString("release_date"));
             }
             return movies;
         }
@@ -189,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-
                     builder.append(line + "\n");
                 }
 
@@ -229,12 +221,13 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Movie[] movies) {
             pbLoadingIndicator.setVisibility(View.INVISIBLE);
             if (movies != null) {
-                movieTaskCallback.updateAdapter(movies);
+                callback.updateAdapter(movies);
             } else {
                 tvErrorMessage.setVisibility(View.VISIBLE);
             }
 
         }
+
     }
 
 }

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import static com.example.android.popularmoviesstage1.MainActivity.KEY_MOVIE;
 import static com.example.android.popularmoviesstage1.MovieAdapter.BASE_URL;
 import static com.example.android.popularmoviesstage1.MovieAdapter.IMAGE_SIZE;
 
@@ -31,18 +30,18 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvDescription = (TextView) findViewById(R.id.tv_description);
         ivPoster = (ImageView) findViewById(R.id.iv_poster);
 
-        Movie movies = getIntent().getParcelableExtra(KEY_MOVIE);
+        Movie movies = getIntent().getParcelableExtra("movie");
 
         if (movies != null) {
             tvTitle.setText(movies.getTitle());
             tvRelease.setText(getResources().getString(R.string.release) + " " + movies.getReleaseDate());
             tvRating.setText(getResources().getString(R.string.rating) + " " + movies.getVoteAverage() + "/10");
             tvDescription.setText(getResources().getString(R.string.overview) + movies.getOverview());
-            loadImage(movies.getPosterPath());
+            loadPoster(movies.getPosterPath());
         }
     }
 
-    private void loadImage(String path) {
+    private void loadPoster(String path) {
         String urlBuilder = new StringBuilder()
                 .append(BASE_URL)
                 .append(IMAGE_SIZE)
