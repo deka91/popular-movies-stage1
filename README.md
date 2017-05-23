@@ -1,4 +1,4 @@
-# popular-movies-stage1
+# Popular Movies Stage 1
 - Upon launch, present the user with an grid arrangement of movie posters.
 - Allow your user to change sort order via a setting:
 - The sort order can be by most popular, or by top rated
