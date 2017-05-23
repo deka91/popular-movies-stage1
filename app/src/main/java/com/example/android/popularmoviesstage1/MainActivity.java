@@ -32,7 +32,8 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8";
+    // TODO Insert your API-KEY here
+    public static final String API_KEY = "";
     public static final String KEY_MOVIE = "MOVIE";
     public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
     private final String POPULAR = "popular";
