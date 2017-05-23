@@ -32,10 +32,9 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String MOVIEDB_API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8";
+    public static final String API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8";
     public static final String KEY_MOVIE = "MOVIE";
     public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
-    public static final String API_KEY = "api_key";
     private final String POPULAR = "popular";
     private final String TOP_RATED = "top_rated";
     private MovieAdapter movieAdapter;
@@ -177,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
             Uri uri = Uri.parse(BASE_URL).buildUpon()
                     .appendEncodedPath(params[0])
-                    .appendQueryParameter(API_KEY, MOVIEDB_API_KEY)
+                    .appendQueryParameter("api_key", API_KEY)
                     .build();
 
             try {
