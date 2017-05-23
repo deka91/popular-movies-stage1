@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         tvErrorMessage = (TextView) findViewById(R.id.tv_error_message_display);
         pbLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
@@ -87,11 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         moviesTask.execute(filter);
     }
-
-    private void showErrorMessage() {
-        tvErrorMessage.setVisibility(View.VISIBLE);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -237,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             if (movies != null) {
                 movieTaskCallback.updateAdapter(movies);
             } else {
-                showErrorMessage();
+                tvErrorMessage.setVisibility(View.VISIBLE);
             }
 
         }
