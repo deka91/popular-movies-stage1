@@ -1,14 +1,14 @@
 package com.example.android.popularmoviesstage1;
 
+import static com.example.android.popularmoviesstage1.MovieAdapter.BASE_URL;
+import static com.example.android.popularmoviesstage1.MovieAdapter.IMAGE_SIZE;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import static com.example.android.popularmoviesstage1.MovieAdapter.BASE_URL;
-import static com.example.android.popularmoviesstage1.MovieAdapter.IMAGE_SIZE;
 
 /**
  * Created by Deniz Kalem on 18.05.17.
