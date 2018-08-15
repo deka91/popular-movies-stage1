@@ -1,7 +1,8 @@
 package com.example.android.popularmoviesstage1;
 
-import static com.example.android.popularmoviesstage1.MovieAdapter.BASE_URL;
-import static com.example.android.popularmoviesstage1.MovieAdapter.IMAGE_SIZE;
+
+import static com.example.android.popularmoviesstage1.Constants.IMAGE_SIZE;
+import static com.example.android.popularmoviesstage1.Constants.MOVIE_URL;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +44,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void loadPoster(String path) {
         String urlBuilder = new StringBuilder()
-                .append(BASE_URL)
+                .append(MOVIE_URL)
                 .append(IMAGE_SIZE)
                 .append(path).toString();
 

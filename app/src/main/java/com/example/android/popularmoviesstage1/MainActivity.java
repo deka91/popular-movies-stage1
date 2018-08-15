@@ -1,5 +1,7 @@
 package com.example.android.popularmoviesstage1;
 
+import static com.example.android.popularmoviesstage1.Constants.MOVIE_URL;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -33,8 +35,7 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     // TODO Insert your API-KEY here
-    public static final String API_KEY = "";
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
+    public static final String API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8";
     private final String POPULAR = "popular";
     private final String TOP_RATED = "top_rated";
     private MovieAdapter movieAdapter;
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             String movieJsonString = null;
             BufferedReader reader = null;
 
-            Uri uri = Uri.parse(BASE_URL).buildUpon()
+            Uri uri = Uri.parse(MOVIE_URL).buildUpon()
                     .appendEncodedPath(params[0])
                     .appendQueryParameter("api_key", API_KEY)
                     .build();
