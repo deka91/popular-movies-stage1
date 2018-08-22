@@ -35,7 +35,7 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     // TODO Insert your API-KEY here
-    public static final String API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8";
+    public static final String API_KEY = "";
     private final String POPULAR = "popular";
     private final String TOP_RATED = "top_rated";
     private MovieAdapter movieAdapter;
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvErrorMessage = (TextView) findViewById(R.id.tv_error_message_display);
-        pbLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        tvErrorMessage = (TextView) findViewById(R.id.textview_main_error_message);
+        pbLoadingIndicator = (ProgressBar) findViewById(R.id.progressbar_main_loading_indicator);
 
         movieList = new ArrayList<>();
         movieAdapter = new MovieAdapter(this, movieList);
-        GridView gvMovies = (GridView) findViewById(R.id.gv_movies);
+        GridView gvMovies = (GridView) findViewById(R.id.gridview_main_movies);
         gvMovies.setAdapter(movieAdapter);
         gvMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
