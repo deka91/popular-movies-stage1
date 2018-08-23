@@ -10,5 +10,6 @@ class Constants {
         const val MOVIE_URL = "https://api.themoviedb.org/3/movie/"
         const val CATEGORY_POPULAR : String = "popular"
         const val CATEGORY_TOP_RATED : String = "top_rated"
+        const val PARCELABLE_EXTRA_MOVIE : String = "movie"
     }
 }
