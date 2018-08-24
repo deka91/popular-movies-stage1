@@ -4,7 +4,7 @@
     <string name="refresh">Refresh</string>
     <string name="most_popular">Sort by most popular</string>
     <string name="top_rated">Sort by highest rated</string>
-    <string name="release">Release:</string>
-    <string name="rating">Rating:</string>
-    <string name="overview">Overview:\n</string>
+    <string name="release">Release: %s</string>
+    <string name="rating">Rating: %s /10</string>
+    <string name="overview">Overview:\n%s</string>
     </resources>
