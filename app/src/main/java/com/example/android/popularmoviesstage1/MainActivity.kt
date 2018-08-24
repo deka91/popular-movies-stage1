@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     private var movieAdapter: MovieAdapter
     private var movieList: ArrayList<Movie> = ArrayList()
-    val API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8"
 
     init {
         movieAdapter = MovieAdapter(this, movieList)
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
             val uri = Uri.parse(MOVIE_URL).buildUpon()
                     .appendEncodedPath(filter)
-                    .appendQueryParameter(QUERY_PARAMETER_API, API_KEY)
+                    .appendQueryParameter(QUERY_PARAMETER_API, BuildConfig.Api_Key)
                     .build()
 
             try {
