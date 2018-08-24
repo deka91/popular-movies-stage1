@@ -9,7 +9,16 @@ import android.view.MenuItem
 import android.view.View
 import com.example.android.popularmoviesstage1.Constants.Companion.CATEGORY_POPULAR
 import com.example.android.popularmoviesstage1.Constants.Companion.CATEGORY_TOP_RATED
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_ORIGINAL_TITLE
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_OVERVIEW
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_POSTER_PATH
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_RELEASE_DATE
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_RESULTS
+import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_JSON_VOTE_AVERAGE
 import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_URL
+import com.example.android.popularmoviesstage1.Constants.Companion.PARCELABLE_EXTRA_MOVIE
+import com.example.android.popularmoviesstage1.Constants.Companion.QUERY_PARAMETER_API
+import com.example.android.popularmoviesstage1.Constants.Companion.REQUEST_METHOD
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -22,7 +31,9 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 
-
+/**
+ * Created by Deniz Kalem on 22.08.2018.
+ */
 class MainActivity : AppCompatActivity() {
 
     private var movieAdapter: MovieAdapter
@@ -41,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         gridview_main_movies.setOnItemClickListener { parent, view, position, id ->
             val movie: Movie = movieAdapter.getItem(position)
             val intent = Intent(this, MovieDetailActivity::class.java)
-            intent.putExtra("movie", movie)
+            intent.putExtra(PARCELABLE_EXTRA_MOVIE, movie)
             startActivity(intent)
         }
 
@@ -62,13 +73,13 @@ class MainActivity : AppCompatActivity() {
 
             val uri = Uri.parse(MOVIE_URL).buildUpon()
                     .appendEncodedPath(filter)
-                    .appendQueryParameter("api_key", API_KEY)
+                    .appendQueryParameter(QUERY_PARAMETER_API, API_KEY)
                     .build()
 
             try {
                 val url = URL(uri.toString())
                 urlConnection = url.openConnection() as HttpURLConnection
-                urlConnection.requestMethod = "GET"
+                urlConnection.requestMethod = REQUEST_METHOD
                 urlConnection.connect()
 
                 val inputStream = urlConnection.inputStream
@@ -129,17 +140,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         val jsonObjectMovie = JSONObject(jsonStringMovie)
-        val jsonArrayMovies = jsonObjectMovie.getJSONArray("results")
+        val jsonArrayMovies = jsonObjectMovie.getJSONArray(MOVIE_JSON_RESULTS)
 
         val movies = arrayOfNulls<Movie>(jsonArrayMovies.length())
 
         for (i in 0 until jsonArrayMovies.length()) {
             val `object` = jsonArrayMovies.getJSONObject(i)
-            movies[i] = Movie(`object`.getString("original_title"),
-                    `object`.getString("poster_path"),
-                    `object`.getString("overview"),
-                    `object`.getString("vote_average"),
-                    `object`.getString("release_date"))
+            movies[i] = Movie(`object`.getString(MOVIE_JSON_ORIGINAL_TITLE),
+                    `object`.getString(MOVIE_JSON_POSTER_PATH),
+                    `object`.getString(MOVIE_JSON_OVERVIEW),
+                    `object`.getString(MOVIE_JSON_VOTE_AVERAGE),
+                    `object`.getString(MOVIE_JSON_RELEASE_DATE))
         }
         return movies
     }
