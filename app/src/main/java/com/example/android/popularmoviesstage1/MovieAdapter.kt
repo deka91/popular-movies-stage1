@@ -15,13 +15,8 @@ import com.squareup.picasso.Picasso
  */
 class MovieAdapter(context: Context, movies: List<Movie>) : BaseAdapter() {
 
-    private val context: Context
-    private val movies: MutableList<Movie>
-
-    init {
-        this.context = context
-        this.movies = movies as MutableList<Movie>
-    }
+    private val context: Context = context
+    private val movies: MutableList<Movie> = movies as MutableList<Movie>
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val imageView: ImageView?
@@ -34,7 +29,7 @@ class MovieAdapter(context: Context, movies: List<Movie>) : BaseAdapter() {
             imageView = convertView as ImageView
         }
 
-        var url: String = StringBuilder().append(BASE_URL).append(IMAGE_SIZE).append(getItem(position).posterPath.trim()).toString()
+        val url: String = StringBuilder().append(BASE_URL).append(IMAGE_SIZE).append(getItem(position).posterPath.trim()).toString()
 
         Picasso.with(context).load(url).into(imageView)
 

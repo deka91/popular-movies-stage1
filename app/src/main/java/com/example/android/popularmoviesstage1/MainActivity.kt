@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private var movieAdapter: MovieAdapter
     private var movieList: ArrayList<Movie> = ArrayList()
-    val API_KEY = ""
+    val API_KEY = "4fb159ec4eb6feeb16c5fb8db540cfd8"
 
     init {
         movieAdapter = MovieAdapter(this, movieList)
@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         gridview_main_movies.adapter = movieAdapter
         gridview_main_movies.setOnItemClickListener { parent, view, position, id ->
-            var movie: Movie = movieAdapter.getItem(position)
-            var intent = Intent(this, MovieDetailActivity::class.java)
+            val movie: Movie = movieAdapter.getItem(position)
+            val intent = Intent(this, MovieDetailActivity::class.java)
             intent.putExtra("movie", movie)
             startActivity(intent)
         }
@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         textview_main_error_message.visibility = View.INVISIBLE
 
         doAsync {
-
             if (filter.isEmpty()) {
                 return@doAsync
             }
@@ -84,12 +83,11 @@ class MainActivity : AppCompatActivity() {
                     builder.append(line + "\n")
                 }
 
-                if (builder.length == 0) {
+                if (builder.isEmpty()) {
                     return@doAsync
                 }
 
                 movieJsonString = builder.toString()
-
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
@@ -114,12 +112,11 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     textview_main_error_message.visibility = View.VISIBLE
                 }
-
             }
         }
     }
 
-    fun updateAdapter(movies: Array<Movie?>) {
+    private fun updateAdapter(movies: Array<Movie?>) {
         movieAdapter.clear()
         Collections.addAll<Movie>(movieList, *movies)
         movieAdapter.notifyDataSetChanged()
@@ -158,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        var id: Int = item!!.itemId
+        val id: Int = item!!.itemId
 
         if (id == R.id.action_top_rated) {
             showMovies(CATEGORY_TOP_RATED)
