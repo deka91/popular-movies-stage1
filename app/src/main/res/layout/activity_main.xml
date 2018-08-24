@@ -14,15 +14,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/all_padding"
+        android:padding="@dimen/padding_view"
         android:text="@string/error_message"
-        android:textSize="20sp"
         android:visibility="invisible" />
 
     <ProgressBar
         android:id="@+id/progressbar_main_loading_indicator"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="@dimen/width_progressdialog"
+        android:layout_height="@dimen/height_progressdiaolog"
         android:layout_gravity="center"
         android:visibility="invisible" />
 </FrameLayout>

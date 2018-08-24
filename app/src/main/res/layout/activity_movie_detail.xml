@@ -8,7 +8,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/all_padding">
+        android:padding="@dimen/padding_view">
 
         <ImageView
             android:id="@+id/imageview_main_movieposter"
@@ -21,7 +21,7 @@
             android:id="@+id/textview_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/all_margin"
+            android:layout_margin="@dimen/margin_view"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/imageview_main_movieposter"
             tools:text="Title" />
@@ -30,7 +30,7 @@
             android:id="@+id/textview_detail_release"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/all_margin"
+            android:layout_margin="@dimen/margin_view"
             app:layout_constraintTop_toBottomOf="@id/textview_detail_title"
             tools:text="Release" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/textview_detail_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/all_margin"
+            android:layout_margin="@dimen/margin_view"
             app:layout_constraintTop_toBottomOf="@id/textview_detail_release"
             tools:text="Rating" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/textview_detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/all_margin"
+            android:layout_margin="@dimen/margin_view"
             app:layout_constraintTop_toBottomOf="@id/textview_detail_rating"
             tools:text="Description" />
     </android.support.constraint.ConstraintLayout>

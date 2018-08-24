@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="all_padding">16dp</dimen>
-    <dimen name="all_margin">8dp</dimen>
+    <dimen name="padding_view">16dp</dimen>
+    <dimen name="margin_view">8dp</dimen>
+    <dimen name="width_progressdialog">48dp</dimen>
+    <dimen name="height_progressdiaolog">48dp</dimen>
 </resources>
