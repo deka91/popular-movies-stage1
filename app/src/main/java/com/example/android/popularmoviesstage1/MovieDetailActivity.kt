@@ -9,6 +9,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import java.lang.StringBuilder
 
+/**
+ * Created by Deniz Kalem on 23.08.2018.
+ */
 class MovieDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,16 +19,16 @@ class MovieDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movie_detail)
 
         val movies: Movie = intent.getParcelableExtra(PARCELABLE_EXTRA_MOVIE)
-        tv_title.text = movies.title
-        tv_release.text = getString(R.string.release, movies.releaseDate)
-        tv_rating.text = resources.getString(R.string.rating, movies.voteAverage)
-        tv_description.text = resources.getString(R.string.overview, movies.overview)
+        textview_detail_title.text = movies.title
+        textview_detail_release.text = getString(R.string.release, movies.releaseDate)
+        textview_detail_rating.text = resources.getString(R.string.rating, movies.voteAverage)
+        textview_detail_description.text = resources.getString(R.string.overview, movies.overview)
 
         loadPoster(movies.posterPath)
     }
 
     private fun loadPoster(path: String) {
         val urlBuilder = StringBuilder().append(MOVIE_URL).append(IMAGE_SIZE).append(path).toString()
-        Picasso.with(applicationContext).load(urlBuilder).into(iv_poster)
+        Picasso.with(applicationContext).load(urlBuilder).into(imageview_main_movieposter)
     }
 }
