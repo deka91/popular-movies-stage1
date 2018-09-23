@@ -1,13 +1,14 @@
-package com.example.android.popularmoviesstage1
+package com.example.android.popularmoviesstage1.features.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.android.popularmoviesstage1.Constants.Companion.IMAGE_SIZE
-import com.example.android.popularmoviesstage1.Constants.Companion.PARCELABLE_EXTRA_MOVIE
-import com.example.android.popularmoviesstage1.Constants.Companion.MOVIE_URL
+import com.example.android.popularmoviesstage1.utils.Constants.Companion.IMAGE_SIZE
+import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_URL
+import com.example.android.popularmoviesstage1.utils.Constants.Companion.PARCELABLE_EXTRA_MOVIE
+import com.example.android.popularmoviesstage1.model.Movie
+import com.example.android.popularmoviesstage1.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
-import java.lang.StringBuilder
 
 /**
  * Created by Deniz Kalem on 23.08.2018.
