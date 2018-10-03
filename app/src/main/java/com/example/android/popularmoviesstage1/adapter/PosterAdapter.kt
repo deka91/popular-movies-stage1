@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import com.example.android.popularmoviesstage1.R
-import com.example.android.popularmoviesstage1.model.Movie
+import com.example.android.popularmoviesstage1.data.Movie
 import com.example.android.popularmoviesstage1.utils.Constants.Companion.BASE_URL
 import com.example.android.popularmoviesstage1.utils.Constants.Companion.IMAGE_SIZE
 import com.squareup.picasso.Picasso

@@ -10,23 +10,14 @@ import android.view.View
 import com.example.android.popularmoviesstage1.BuildConfig
 import com.example.android.popularmoviesstage1.R
 import com.example.android.popularmoviesstage1.adapter.PosterAdapter
+import com.example.android.popularmoviesstage1.data.Movie
 import com.example.android.popularmoviesstage1.features.detail.MovieDetailActivity
-import com.example.android.popularmoviesstage1.model.Movie
 import com.example.android.popularmoviesstage1.utils.Constants
 import com.example.android.popularmoviesstage1.utils.Constants.Companion.CATEGORY_POPULAR
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.CATEGORY_TOP_RATED
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_ORIGINAL_TITLE
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_OVERVIEW
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_POSTER_PATH
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_RELEASE_DATE
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_RESULTS
-import com.example.android.popularmoviesstage1.utils.Constants.Companion.MOVIE_JSON_VOTE_AVERAGE
 import com.example.android.popularmoviesstage1.utils.Constants.Companion.PARCELABLE_EXTRA_MOVIE
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import org.json.JSONException
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -52,15 +43,34 @@ class PosterActivity : AppCompatActivity(), PosterContract.View {
         setContentView(R.layout.activity_main)
         presenter = PosterPrenter(this)
 
-        gridview_main_movies.adapter = mPosterAdapter
-        gridview_main_movies.setOnItemClickListener { parent, view, position, id ->
-            val movie: Movie = mPosterAdapter.getItem(position)
-            val intent = Intent(this, MovieDetailActivity::class.java)
-            intent.putExtra(PARCELABLE_EXTRA_MOVIE, movie)
-            startActivity(intent)
+        initAdapter()
+        showPoster(CATEGORY_POPULAR)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        showPoster(CATEGORY_POPULAR)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id: Int = item!!.itemId
+
+        if (id == R.id.action_top_rated) {
+            showPoster(Constants.CATEGORY_TOP_RATED)
+            return true;
         }
 
-        showPoster(CATEGORY_POPULAR)
+        if (id == R.id.action_most_popular || id == R.id.action_refresh) {
+            showPoster(CATEGORY_POPULAR)
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showPoster(filter: String) {
@@ -118,7 +128,7 @@ class PosterActivity : AppCompatActivity(), PosterContract.View {
                 }
             }
 
-            val movies = getMoviesFromJson(movieJsonString)
+            val movies = presenter!!.getMoviesFromJson(movieJsonString)
 
             uiThread() {
                 progressbar_main_loading_indicator.visibility = View.INVISIBLE
@@ -131,58 +141,19 @@ class PosterActivity : AppCompatActivity(), PosterContract.View {
         }
     }
 
-
     override fun updatePoster(movies: Array<Movie?>) {
         mPosterAdapter.clear()
         Collections.addAll<Movie>(movieList, *movies)
         mPosterAdapter.notifyDataSetChanged()
     }
 
-    @Throws(JSONException::class)
-    fun getMoviesFromJson(jsonStringMovie: String?): Array<Movie?> {
-        if (jsonStringMovie == null || "" == jsonStringMovie) {
-            return emptyArray()
+    private fun initAdapter() {
+        gridview_main_movies.adapter = mPosterAdapter
+        gridview_main_movies.setOnItemClickListener { parent, view, position, id ->
+            val movie: Movie = mPosterAdapter.getItem(position)
+            val intent = Intent(this, MovieDetailActivity::class.java)
+            intent.putExtra(PARCELABLE_EXTRA_MOVIE, movie)
+            startActivity(intent)
         }
-
-        val jsonObjectMovie = JSONObject(jsonStringMovie)
-        val jsonArrayMovies = jsonObjectMovie.getJSONArray(MOVIE_JSON_RESULTS)
-
-        val movies = arrayOfNulls<Movie>(jsonArrayMovies.length())
-
-        for (i in 0 until jsonArrayMovies.length()) {
-            val `object` = jsonArrayMovies.getJSONObject(i)
-            movies[i] = Movie(`object`.getString(MOVIE_JSON_ORIGINAL_TITLE),
-                    `object`.getString(MOVIE_JSON_POSTER_PATH),
-                    `object`.getString(MOVIE_JSON_OVERVIEW),
-                    `object`.getString(MOVIE_JSON_VOTE_AVERAGE),
-                    `object`.getString(MOVIE_JSON_RELEASE_DATE))
-        }
-        return movies
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onStart() {
-        super.onStart()
-        showPoster(CATEGORY_POPULAR)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val id: Int = item!!.itemId
-
-        if (id == R.id.action_top_rated) {
-            showPoster(CATEGORY_TOP_RATED)
-            return true;
-        }
-
-        if (id == R.id.action_most_popular || id == R.id.action_refresh) {
-            showPoster(CATEGORY_POPULAR)
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }

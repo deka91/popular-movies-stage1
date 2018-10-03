@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesstage1.model
+package com.example.android.popularmoviesstage1.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

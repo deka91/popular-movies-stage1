@@ -1,6 +1,6 @@
 package com.example.android.popularmoviesstage1.features.poster
 
-import com.example.android.popularmoviesstage1.model.Movie
+import com.example.android.popularmoviesstage1.data.Movie
 
 /**
  * Created by Deniz Kalem on 22.09.2018.
