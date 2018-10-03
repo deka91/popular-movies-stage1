@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesstage1
+package com.example.android.popularmoviesstage1.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import com.example.android.popularmoviesstage1.Constants.Companion.BASE_URL
-import com.example.android.popularmoviesstage1.Constants.Companion.IMAGE_SIZE
+import com.example.android.popularmoviesstage1.R
+import com.example.android.popularmoviesstage1.data.Movie
+import com.example.android.popularmoviesstage1.utils.Constants.Companion.BASE_URL
+import com.example.android.popularmoviesstage1.utils.Constants.Companion.IMAGE_SIZE
 import com.squareup.picasso.Picasso
 
 /**
  * Created by Deniz Kalem on 12.08.2018.
  */
-class MovieAdapter(context: Context, movies: List<Movie>) : BaseAdapter() {
+class PosterAdapter(context: Context, movies: List<Movie>) : BaseAdapter() {
 
     private val context: Context = context
     private val movies: MutableList<Movie> = movies as MutableList<Movie>

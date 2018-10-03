@@ -1,4 +1,4 @@
-package com.example.android.popularmoviesstage1
+package com.example.android.popularmoviesstage1.utils
 
 /**
  * Created by Deniz Kalem on 15.08.2018.
