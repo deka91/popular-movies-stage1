@@ -8,7 +8,7 @@ import com.example.android.popularmoviesstage1.data.Movie
 interface PosterContract {
 
     interface View {
-        fun showPoster(filter: String);
+        fun showPoster(filter: String)
         fun updatePoster(movies: Array<Movie?>)
     }
 
